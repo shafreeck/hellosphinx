@@ -230,7 +230,7 @@ int main(int argc,char **argv)
 		{
 			sphinx_add_filter_float_range(client,iter_range->first.c_str(),(float)range.min.value_f,(float)range.max.value_f,false);
 		}
-	
+
 	}
 
 	sphinx_set_limits(client,offset,limit,0,0);
