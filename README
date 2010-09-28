@@ -1,0 +1,27 @@
+usage:
+valid params:[--host=][--port=]--index= [--query=][--limit=][--offset=][--filter=]
+--host= tell me the sphinx server ip,default is localhost
+--port= tell me the sphinx server port,defalult is 9312
+--index= the index name to query, must be setted
+--query= the sphinx query language ,we use extend2 match mode
+--filter= the sphinx filters you set ,just for int values now,the pattern is: key1=value1&key2=value2
+--offset= where to start,default value is 0
+--limit= how many to return,cooperates with offset, default value is 10
+
+
+for example:./hellosphinx --host=10.10.1.1 --port=9312 --index=product_index_main_5 --query="租房" --filter="cateID=43&cityID=188" --limit=10 --offset=0
+解释：
+因为官方提供的search程序，只能检索磁盘上的索引，而不是连接searchd程序，给一些调试带来不便，因此我写了这个程序
+各选项含义：
+--host=  指定sphinx searchd 在的服务器地址
+--port=  host 对应服务器上sphinx searchd监听的端口
+--index= 要检索的索引名称
+--query= 要检索的sphinx查询语句
+--filter= 设置sphinx的过滤选项,暂时不支持浮点型,以及范围(range)
+--offset= 偏移个数，即从多少条开始显示
+--limit= 返回多少条数据
+
+以上所有的选项，都可以写为能相互区分的最简形式，比如--host可以写为--host,--hos,--ho,--h,同时'--'也可以简写为'-',所以--host还可以写为：-host,-hos,-ho,-h
+
+
+test.cpp 是一个tire树的实现（很烂）,本来想用于参数解析的，不过参数首字母重叠的并不多，就干脆用switch ... case代替了
